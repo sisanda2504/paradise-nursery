@@ -1,0 +1,25 @@
+.about-us {
+  max-width: 720px;
+  margin: 40px auto 0;
+  background: rgba(255, 255, 255, 0.92);
+  color: #22331f;
+  padding: 28px 32px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.about-us h2 {
+  margin-bottom: 14px;
+  color: #1f3d24;
+}
+
+.about-us p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+.about-us p:last-child {
+  margin-bottom: 0;
+}

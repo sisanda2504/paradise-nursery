@@ -1,0 +1,20 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background image implementation for the Paradise Nursery landing page
+   (Task 3). Uses a photographic plant/nursery image with a dark-green
+   overlay gradient so the white title/tagline text stays readable. */
+.landing {
+  background-image: linear-gradient(
+      rgba(10, 30, 15, 0.55),
+      rgba(10, 30, 15, 0.65)
+    ),
+    url("https://images.unsplash.com/photo-1466692476868-9ee5a3a3e93b?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

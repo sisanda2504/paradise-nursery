@@ -1,0 +1,51 @@
+.landing {
+  min-height: calc(100vh - 64px);
+  /* The background-image itself is implemented in App.css (.landing rule)
+     as required for the Paradise Nursery landing page. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 100px 24px;
+}
+
+.landing-overlay {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.landing-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.landing-tagline {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #eef5ee;
+}
+
+.get-started-btn {
+  margin-top: 8px;
+  padding: 14px 36px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 30px;
+  background: #e0742f;
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.get-started-btn:hover {
+  background: #c9631f;
+  transform: translateY(-2px);
+}
