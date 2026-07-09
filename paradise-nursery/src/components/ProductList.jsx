@@ -16,6 +16,7 @@ const ProductList = () => {
   const isInCart = (id) => cartItems.some((item) => item.id === id);
 
   const handleAddToCart = (plant) => {
+    if (isInCart(plant.id)) return;
     dispatch(
       addItem({
         id: plant.id,
@@ -30,6 +31,15 @@ const ProductList = () => {
       return next;
     });
   };
+
+  // Keep addedIds in sync with the actual cart state so removing an item
+  // re-enables the Add button.
+  React.useEffect(() => {
+    setAddedIds((prev) => {
+      const next = new Set([...prev].filter((id) => cartItems.some((i) => i.id === id)));
+      return next;
+    });
+  }, [cartItems]);
 
   return (
     <div className="product-list">

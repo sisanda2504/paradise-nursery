@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Landing from "./components/Landing";
@@ -8,6 +8,7 @@ import "./App.css";
 
 function App() {
   const navigate = useNavigate();
+  const [showProductList, setShowProductList] = useState(false);
 
   return (
     <div className="app">
@@ -15,14 +16,17 @@ function App() {
         <h1>Welcome to Paradise Nursery</h1>
         <button
           className="get-started-btn"
-          onClick={() => navigate("/products")}
+          onClick={() => {
+            setShowProductList(true);
+            navigate("/products");
+          }}
         >
           Get Started
         </button>
       </header>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Landing setShowProductList={setShowProductList} />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<CartItem />} />
       </Routes>
