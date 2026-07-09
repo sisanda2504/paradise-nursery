@@ -4,21 +4,22 @@ import "./AboutUs.css";
 const AboutUs = () => {
   return (
     <section className="about-us" id="about-us">
-      <h2>About Paradise Nursery</h2>
-      <p>
-        Paradise Nursery has been cultivating happiness and serenity since our
-        founding, with a simple belief: everyone deserves a little green in
-        their life. We specialize in curating a diverse selection of plants,
-        each accompanied by care instructions tailored to your lifestyle and
-        experience level.
-      </p>
-      <p>
-        Our mission is to provide an enjoyable shopping experience,
-        connecting plant enthusiasts with the botanical wonders that will
-        enhance their spaces. From air-purifying favorites to low-maintenance
-        succulents and vibrant flowering plants, our collection is designed
-        to bring life, color, and cleaner air into every home.
-      </p>
+      <div className="about-us-container">
+        <h2>Welcome to Paradise Nursery</h2>
+        <p>
+          Paradise Nursery is a family-owned plant shop dedicated to helping
+          you bring greenery into your home. We curate a thoughtful selection
+          of houseplants, pots, and care guides so both beginners and seasoned
+          plant parents can find the right match for their space.
+        </p>
+        <p>
+          Our mission is to make plant ownership simple and enjoyable: we
+          provide clear care instructions, quality plants, and friendly
+          support so you can grow confidence alongside your plants. Explore
+          our collections for air-purifying varieties, low-maintenance
+          succulents, and vibrant flowering houseplants.
+        </p>
+      </div>
     </section>
   );
 };

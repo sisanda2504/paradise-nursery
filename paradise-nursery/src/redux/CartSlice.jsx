@@ -44,6 +44,18 @@ export const CartSlice = createSlice({
         }
       }
     },
+    updateQuantity: (state, action) => {
+      const { id, quantity } = action.payload;
+      const item = state.items.find((item) => item.id === id);
+      if (!item) return;
+      const qty = Number(quantity);
+      if (isNaN(qty) || qty <= 0) {
+        // remove if invalid or zero
+        state.items = state.items.filter((i) => i.id !== id);
+      } else {
+        item.quantity = qty;
+      }
+    },
     clearCart: (state) => {
       state.items = [];
     },
@@ -55,6 +67,7 @@ export const {
   removeItem,
   incrementQuantity,
   decrementQuantity,
+  updateQuantity,
   clearCart,
 } = CartSlice.actions;
 
