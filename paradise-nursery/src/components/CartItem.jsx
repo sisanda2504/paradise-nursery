@@ -10,23 +10,45 @@ import PlantIcon from "./PlantIcon";
 import "./CartItem.css";
 
 const CartItem = () => {
-  const items = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [checkoutMessage, setCheckoutMessage] = useState("");
 
-  const totalAmount = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-
-  const handleCheckout = () => {
-    setCheckoutMessage("Coming Soon! Checkout functionality is under development.");
+  const getPlantPrice = (item) => {
+    if (typeof item.price === "number") return item.price;
+    return Number(String(item.price).replace(/[^0-9.]/g, "")) || 0;
   };
 
-  if (items.length === 0) {
+  const calculateTotalCost = (item) => getPlantPrice(item) * item.quantity;
+
+  const calculateTotalAmount = () =>
+    cartItems.reduce((sum, item) => sum + calculateTotalCost(item), 0);
+
+  const handleIncrement = (itemId) => {
+    dispatch(incrementQuantity(itemId));
+  };
+
+  const handleDecrement = (itemId) => {
+    dispatch(decrementQuantity(itemId));
+  };
+
+  const handleDelete = (itemId) => {
+    dispatch(removeItem(itemId));
+  };
+
+  const handleContinueShopping = () => {
+    navigate("/products");
+  };
+
+  const handleCheckout = () => {
+    setCheckoutMessage("Coming Soon");
+  };
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalAmount = calculateTotalAmount();
+
+  if (cartItems.length === 0) {
     return (
       <div className="cart-page">
         <h1 className="cart-heading">Your Shopping Cart</h1>
@@ -34,7 +56,7 @@ const CartItem = () => {
           Your cart is empty. Head over to the plant shop to find your next
           favorite houseplant!
         </p>
-        <button className="continue-btn" onClick={() => navigate("/products")}>
+        <button className="continue-btn" onClick={handleContinueShopping}>
           Continue Shopping
         </button>
       </div>
@@ -50,31 +72,31 @@ const CartItem = () => {
       </p>
 
       <div className="cart-items">
-        {items.map((item) => (
+        {cartItems.map((item) => (
           <div className="cart-item" key={item.id}>
             <div className="cart-item-thumb">
               <PlantIcon {...item.image} />
             </div>
             <div className="cart-item-info">
               <h3>{item.name}</h3>
-              <p className="unit-price">Unit price: R{item.price.toFixed(2)}</p>
+              <p className="unit-price">Unit price: R{getPlantPrice(item).toFixed(2)}</p>
               <p className="line-total">
-                Subtotal: R{(item.price * item.quantity).toFixed(2)}
+                Total cost: R{calculateTotalCost(item).toFixed(2)}
               </p>
             </div>
             <div className="cart-item-controls">
               <div className="quantity-controls">
                 <button
                   className="qty-btn"
-                  onClick={() => dispatch(decrementQuantity(item.id))}
+                  onClick={() => handleDecrement(item.id)}
                   aria-label={`Decrease quantity of ${item.name}`}
                 >
-                  −
+                  -
                 </button>
                 <span className="qty-value">{item.quantity}</span>
                 <button
                   className="qty-btn"
-                  onClick={() => dispatch(incrementQuantity(item.id))}
+                  onClick={() => handleIncrement(item.id)}
                   aria-label={`Increase quantity of ${item.name}`}
                 >
                   +
@@ -82,7 +104,7 @@ const CartItem = () => {
               </div>
               <button
                 className="delete-btn"
-                onClick={() => dispatch(removeItem(item.id))}
+                onClick={() => handleDelete(item.id)}
               >
                 Delete
               </button>
@@ -99,7 +121,7 @@ const CartItem = () => {
       {checkoutMessage && <p className="checkout-message">{checkoutMessage}</p>}
 
       <div className="cart-actions">
-        <button className="continue-btn" onClick={() => navigate("/products")}>
+        <button className="continue-btn" onClick={handleContinueShopping}>
           Continue Shopping
         </button>
         <button className="checkout-btn" onClick={handleCheckout}>

@@ -11,7 +11,7 @@ function App() {
   const [showProductList, setShowProductList] = useState(false);
 
   return (
-    <div className="app">
+    <div className="app" data-show-product-list={showProductList}>
       <header className="app-header">
         <h1>Welcome to Paradise Nursery</h1>
         <button
